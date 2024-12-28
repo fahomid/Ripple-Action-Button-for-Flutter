@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ripple_action_button/ripple_action_button.dart';
 
@@ -7,6 +6,8 @@ void main() {
 }
 
 class SimpleButtonExample extends StatelessWidget {
+  const SimpleButtonExample({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

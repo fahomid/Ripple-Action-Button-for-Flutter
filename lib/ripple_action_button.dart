@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'logger_stub.dart' if (dart.library.io) 'package:logger/logger.dart';
 import 'package:async/async.dart';
 
 /// Enum to manage the button's states.
@@ -62,11 +62,17 @@ class RippleActionButton extends StatefulWidget {
   /// Opacity of the ripple effect on button press.
   final double? rippleHighlightOpacity;
 
+  /// Ripple splash factory.
+  final InteractiveInkFeatureFactory? rippleSplashFactory;
+
   /// Duration of animations between state transitions.
   final Duration animationDuration;
 
   /// Animation curve for transitioning to the idle state.
   final Curve idleCurve;
+
+  /// Whether button is enabled or not.
+  final bool enabled;
 
   /// Animation curve for transitioning to the loading state.
   final Curve loadingCurve;
@@ -148,6 +154,7 @@ class RippleActionButton extends StatefulWidget {
     this.buttonDecoration,
     this.rippleSplashColor = Colors.grey,
     this.rippleHighlightColor = Colors.grey,
+    this.rippleSplashFactory,
     this.rippleSplashOpacity = 0.3,
     this.rippleHighlightOpacity = 0.3,
     this.animationDuration = const Duration(milliseconds: 200),
@@ -156,6 +163,7 @@ class RippleActionButton extends StatefulWidget {
     this.successCurve = Curves.easeInOut,
     this.errorCurve = Curves.easeInOut,
     this.autoHideKeyboard = false,
+    this.enabled = true,
     this.onIdle,
     this.onLoading,
     this.onSuccess,
@@ -214,7 +222,7 @@ class RippleActionButtonState extends State<RippleActionButton> {
       });
     } else {
       final renderBox =
-          _idleKey.currentContext?.findRenderObject() as RenderBox?;
+      _idleKey.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox != null) {
         setState(() {
           _buttonHeight = renderBox.size.height;
@@ -226,17 +234,12 @@ class RippleActionButtonState extends State<RippleActionButton> {
 
   Future<void> _handlePress() async {
     // Check if any pending task before continuing
-    if (!mounted ||
-        (_ongoingOperation != null && !_ongoingOperation!.isCompleted) ||
-        widget.onPressed == null ||
-        _currentState.value != ButtonState.idle) {
+    if (!mounted || !widget.enabled || (_ongoingOperation != null && !_ongoingOperation!.isCompleted) || widget.onPressed == null || _currentState.value != ButtonState.idle) {
       return;
     }
 
     // Auto-hide keyboard on button press
-    if (widget.autoHideKeyboard &&
-        mounted &&
-        FocusScope.of(context).isFirstFocus) {
+    if (widget.autoHideKeyboard && mounted && FocusScope.of(context).isFirstFocus) {
       FocusScope.of(context).unfocus();
 
       // Call on auto-hide keyboard method
@@ -358,8 +361,7 @@ class RippleActionButtonState extends State<RippleActionButton> {
     final splashColor = widget.rippleSplashColor ?? theme.splashColor;
     final splashOpacity = widget.rippleSplashOpacity ?? theme.splashColor.a;
     final highlightColor = widget.rippleHighlightColor ?? theme.highlightColor;
-    final highlightOpacity =
-        widget.rippleHighlightOpacity ?? theme.highlightColor.a;
+    final highlightOpacity = widget.rippleHighlightOpacity ?? theme.highlightColor.a;
 
     return ValueListenableBuilder<ButtonState>(
       valueListenable: _currentState,
@@ -370,39 +372,40 @@ class RippleActionButtonState extends State<RippleActionButton> {
           button: true,
           enabled: state == ButtonState.idle,
           label: _getAccessibilityLabel(state),
-          child: ClipRRect(
-            borderRadius: decoration.borderRadius?.resolve(TextDirection.ltr) ??
-                BorderRadius.circular(8.0),
-            child: AnimatedContainer(
-              duration: widget.animationDuration,
-              height: _buttonHeight,
-              width: _buttonWidth,
-              decoration: decoration,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedSwitcher(
-                    duration: widget.animationDuration,
-                    switchInCurve: _getCurveForState(state),
-                    switchOutCurve: _getCurveForState(state),
-                    child: state == ButtonState.idle
-                        ? SizedBox(key: _idleKey, child: currentWidget)
-                        : currentWidget,
-                  ),
-                  Positioned.fill(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: state == ButtonState.idle ? _handlePress : null,
-                        splashColor: splashColor
-                            .withAlpha((splashOpacity * 255).toInt()),
-                        highlightColor: highlightColor
-                            .withAlpha((highlightOpacity * 255).toInt()),
-                        child: Container(),
+          child: Opacity(
+            opacity: widget.enabled ? 1.0 : 0.5, // Adjust opacity when disabled
+            child:  ClipRRect(
+              borderRadius: decoration.borderRadius?.resolve(TextDirection.ltr) ?? BorderRadius.circular(8.0),
+              child: AnimatedContainer(
+                duration: widget.animationDuration,
+                height: _buttonHeight,
+                width: _buttonWidth,
+                decoration: decoration,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AnimatedSwitcher(
+                      duration: widget.animationDuration,
+                      switchInCurve: _getCurveForState(state),
+                      switchOutCurve: _getCurveForState(state),
+                      child: state == ButtonState.idle
+                          ? SizedBox(key: _idleKey, child: currentWidget)
+                          : currentWidget,
+                    ),
+                    Positioned.fill(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          splashFactory: widget.rippleSplashFactory,
+                          splashColor: splashColor.withAlpha((splashOpacity * 255).toInt()),
+                          highlightColor: highlightColor.withAlpha((highlightOpacity * 255).toInt()),
+                          onTap: widget.enabled ? _handlePress : null,
+                          child: Container(),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
