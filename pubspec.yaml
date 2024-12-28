@@ -1,6 +1,6 @@
 name: ripple_action_button
 description: "A versatile, state-driven button widget with ripple effects for Flutter. Supports idle, loading, success, and error states with full customization."
-version: 1.1.1
+version: 1.1.2
 homepage: https://github.com/fahomid/Ripple-Action-Button-for-Flutter
 repository: https://github.com/fahomid/Ripple-Action-Button-for-Flutter
 issue_tracker: https://github.com/fahomid/Ripple-Action-Button-for-Flutter/issues

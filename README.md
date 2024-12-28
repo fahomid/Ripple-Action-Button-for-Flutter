@@ -27,7 +27,13 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  ripple_action_button: ^1.1.0
+  ripple_action_button: ^1.1.2
+```
+
+Or, use the flutter pub add command:
+
+```yaml
+flutter pub add ripple_action_button
 ```
 
 Then import it in your Dart file:

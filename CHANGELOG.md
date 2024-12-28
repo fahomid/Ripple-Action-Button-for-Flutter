@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2 Small change
+### Fixed
+- Corrected the version number mentioned in the README file to match the latest version of the package.
+
 ## 1.1.1 Small changes
 - Fixed formatting issues to comply with Dart formatter.
 - Resolved static analysis warnings to improve package quality.
