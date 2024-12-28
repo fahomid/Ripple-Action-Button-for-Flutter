@@ -222,7 +222,7 @@ class RippleActionButtonState extends State<RippleActionButton> {
       });
     } else {
       final renderBox =
-      _idleKey.currentContext?.findRenderObject() as RenderBox?;
+          _idleKey.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox != null) {
         setState(() {
           _buttonHeight = renderBox.size.height;
@@ -234,12 +234,18 @@ class RippleActionButtonState extends State<RippleActionButton> {
 
   Future<void> _handlePress() async {
     // Check if any pending task before continuing
-    if (!mounted || !widget.enabled || (_ongoingOperation != null && !_ongoingOperation!.isCompleted) || widget.onPressed == null || _currentState.value != ButtonState.idle) {
+    if (!mounted ||
+        !widget.enabled ||
+        (_ongoingOperation != null && !_ongoingOperation!.isCompleted) ||
+        widget.onPressed == null ||
+        _currentState.value != ButtonState.idle) {
       return;
     }
 
     // Auto-hide keyboard on button press
-    if (widget.autoHideKeyboard && mounted && FocusScope.of(context).isFirstFocus) {
+    if (widget.autoHideKeyboard &&
+        mounted &&
+        FocusScope.of(context).isFirstFocus) {
       FocusScope.of(context).unfocus();
 
       // Call on auto-hide keyboard method
@@ -361,7 +367,8 @@ class RippleActionButtonState extends State<RippleActionButton> {
     final splashColor = widget.rippleSplashColor ?? theme.splashColor;
     final splashOpacity = widget.rippleSplashOpacity ?? theme.splashColor.a;
     final highlightColor = widget.rippleHighlightColor ?? theme.highlightColor;
-    final highlightOpacity = widget.rippleHighlightOpacity ?? theme.highlightColor.a;
+    final highlightOpacity =
+        widget.rippleHighlightOpacity ?? theme.highlightColor.a;
 
     return ValueListenableBuilder<ButtonState>(
       valueListenable: _currentState,
@@ -374,8 +381,10 @@ class RippleActionButtonState extends State<RippleActionButton> {
           label: _getAccessibilityLabel(state),
           child: Opacity(
             opacity: widget.enabled ? 1.0 : 0.5, // Adjust opacity when disabled
-            child:  ClipRRect(
-              borderRadius: decoration.borderRadius?.resolve(TextDirection.ltr) ?? BorderRadius.circular(8.0),
+            child: ClipRRect(
+              borderRadius:
+                  decoration.borderRadius?.resolve(TextDirection.ltr) ??
+                      BorderRadius.circular(8.0),
               child: AnimatedContainer(
                 duration: widget.animationDuration,
                 height: _buttonHeight,
@@ -397,8 +406,10 @@ class RippleActionButtonState extends State<RippleActionButton> {
                         color: Colors.transparent,
                         child: InkWell(
                           splashFactory: widget.rippleSplashFactory,
-                          splashColor: splashColor.withAlpha((splashOpacity * 255).toInt()),
-                          highlightColor: highlightColor.withAlpha((highlightOpacity * 255).toInt()),
+                          splashColor: splashColor
+                              .withAlpha((splashOpacity * 255).toInt()),
+                          highlightColor: highlightColor
+                              .withAlpha((highlightOpacity * 255).toInt()),
                           onTap: widget.enabled ? _handlePress : null,
                           child: Container(),
                         ),

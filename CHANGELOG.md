@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 Small changes
+- Fixed formatting issues to comply with Dart formatter.
+- Resolved static analysis warnings to improve package quality.
+
 ## Version 1.1.0 - Enhancements and Bug Fixes
 
 ### New Features
