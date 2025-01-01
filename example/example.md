@@ -8,18 +8,18 @@ This document provides comprehensive examples and explanations for using the `Ri
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text(
-'Submit',
-style: TextStyle(color: Colors.white, fontSize: 18),
-),
-),
-onPressed: () async {
-// Simulate an async operation
-await Future.delayed(Duration(seconds: 2));
-return true; // Return true for success, false for error
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+            'Submit',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+    ),
+    onPressed: () async {
+        // Simulate an async operation
+        await Future.delayed(Duration(seconds: 2));
+        return true; // Return true for success, false for error
+    },
 )
 ```
 
@@ -32,30 +32,30 @@ The padding ensures the content inside the button has sufficient spacing.
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Start Action', style: TextStyle(color: Colors.white)),
-),
-loadingWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: CircularProgressIndicator(color: Colors.white),
-),
-successWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Icon(Icons.check, color: Colors.white),
-),
-errorWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Icon(Icons.error, color: Colors.red),
-),
-onPressed: () async {
-// Simulate an operation
-await Future.delayed(Duration(seconds: 3));
-return true; // Success
-},
-onComplete: (status) async {
-print('Button finished with status: $status');
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Start Action', style: TextStyle(color: Colors.white)),
+    ),
+    loadingWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: CircularProgressIndicator(color: Colors.white),
+    ),
+    successWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Icon(Icons.check, color: Colors.white),
+    ),
+    errorWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Icon(Icons.error, color: Colors.red),
+    ),
+    onPressed: () async {
+        // Simulate an operation
+        await Future.delayed(Duration(seconds: 3));
+        return true; // Success
+    },
+    onComplete: (status) async {
+        print('Button finished with status: $status');
+    },
 )
 ```
 
@@ -71,14 +71,14 @@ print('Button finished with status: $status');
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Disabled Button', style: TextStyle(color: Colors.grey)),
-),
-enabled: false, // Button is disabled
-onPressed: () async {
-return true;
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Disabled Button', style: TextStyle(color: Colors.grey)),
+    ),
+    enabled: false, // Button is disabled
+    onPressed: () async {
+        return true;
+    },
 )
 ```
 
@@ -96,16 +96,16 @@ return true;
 final GlobalKey<RippleActionButtonState> buttonKey = GlobalKey<RippleActionButtonState>();
 
 RippleActionButton(
-key: buttonKey,
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Simulate Click', style: TextStyle(color: Colors.white)),
-),
-onPressed: () async {
-// Simulate async operation
-await Future.delayed(Duration(seconds: 2));
-return true;
-},
+    key: buttonKey,
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Simulate Click', style: TextStyle(color: Colors.white)),
+    ),
+    onPressed: () async {
+        // Simulate async operation
+        await Future.delayed(Duration(seconds: 2));
+        return true;
+    },
 );
 
 // Somewhere else in your code
@@ -124,14 +124,14 @@ buttonKey.currentState?.simulateClick();
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Submit', style: TextStyle(color: Colors.white)),
-),
-autoHideKeyboard: true,
-onPressed: () async {
-return true;
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Submit', style: TextStyle(color: Colors.white)),
+    ),
+    autoHideKeyboard: true,
+    onPressed: () async {
+        return true;
+    },
 )
 ```
 
@@ -144,25 +144,25 @@ The `autoHideKeyboard` property only works for **physical button presses**, not 
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Upload File', style: TextStyle(color: Colors.white)),
-),
-loadingWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Row(
-mainAxisSize: MainAxisSize.min,
-children: [
-CircularProgressIndicator(color: Colors.white),
-SizedBox(width: 8),
-Text('Uploading...', style: TextStyle(color: Colors.white)),
-],
-),
-),
-onPressed: () async {
-await Future.delayed(Duration(seconds: 5));
-return true;
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Upload File', style: TextStyle(color: Colors.white)),
+    ),
+    loadingWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                CircularProgressIndicator(color: Colors.white),
+                SizedBox(width: 8),
+                Text('Uploading...', style: TextStyle(color: Colors.white)),
+            ],
+        ),
+    ),
+    onPressed: () async {
+        await Future.delayed(Duration(seconds: 5));
+        return true;
+    },
 )
 ```
 
@@ -172,23 +172,23 @@ return true;
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Action', style: TextStyle(color: Colors.white)),
-),
-successWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Icon(Icons.check, color: Colors.green),
-),
-errorWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Icon(Icons.error, color: Colors.red),
-),
-successDuration: Duration(seconds: 3),
-errorDuration: Duration(seconds: 2),
-onPressed: () async {
-return false; // Simulate error
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Action', style: TextStyle(color: Colors.white)),
+    ),
+    successWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Icon(Icons.check, color: Colors.green),
+    ),
+    errorWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Icon(Icons.error, color: Colors.red),
+    ),
+    successDuration: Duration(seconds: 3),
+    errorDuration: Duration(seconds: 2),
+    onPressed: () async {
+        return false; // Simulate error
+    },
 )
 ```
 
@@ -198,24 +198,24 @@ return false; // Simulate error
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Custom Style', style: TextStyle(color: Colors.white)),
-),
-buttonDecoration: BoxDecoration(
-color: Colors.blue,
-borderRadius: BorderRadius.circular(12.0),
-boxShadow: [
-BoxShadow(
-color: Colors.black26,
-offset: Offset(0, 4),
-blurRadius: 8.0,
-),
-],
-),
-onPressed: () async {
-return true;
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Custom Style', style: TextStyle(color: Colors.white)),
+    ),
+    buttonDecoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(12.0),
+        boxShadow: [
+            BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0, 4),
+                blurRadius: 8.0,
+            ),
+        ],
+    ),
+    onPressed: () async {
+        return true;
+    },
 )
 ```
 
@@ -230,62 +230,62 @@ Customize the button’s appearance with the `buttonDecoration` property, includ
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Column(
-mainAxisSize: MainAxisSize.min,
-children: [
-Row(
-mainAxisSize: MainAxisSize.min,
-children: [
-Icon(Icons.upload, color: Colors.white),
-SizedBox(width: 8),
-Text('Upload File', style: TextStyle(color: Colors.white)),
-],
-),
-SizedBox(height: 8),
-Text('Tap to upload your files', style: TextStyle(color: Colors.white70, fontSize: 12)),
-],
-),
-),
-loadingWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Column(
-mainAxisSize: MainAxisSize.min,
-children: [
-CircularProgressIndicator(color: Colors.white),
-SizedBox(height: 8),
-Text('Uploading...', style: TextStyle(color: Colors.white)),
-],
-),
-),
-successWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Column(
-mainAxisSize: MainAxisSize.min,
-children: [
-Icon(Icons.check_circle, color: Colors.green, size: 32),
-SizedBox(height: 8),
-Text('Upload Successful!', style: TextStyle(color: Colors.white)),
-],
-),
-),
-errorWidget: Padding(
-padding: EdgeInsets.all(12.0),
-child: Column(
-mainAxisSize: MainAxisSize.min,
-children: [
-Icon(Icons.error, color: Colors.red, size: 32),
-SizedBox(height: 8),
-Text('Upload Failed', style: TextStyle(color: Colors.white)),
-],
-),
-),
-onPressed: () async {
-// Simulate a long operation
-await Future.delayed(Duration(seconds: 4));
-return true; // Return false for error
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                        Icon(Icons.upload, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text('Upload File', style: TextStyle(color: Colors.white)),
+                    ],
+                ),
+                SizedBox(height: 8),
+                Text('Tap to upload your files', style: TextStyle(color: Colors.white70, fontSize: 12)),
+            ],
+        ),
+    ),
+    loadingWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                CircularProgressIndicator(color: Colors.white),
+                SizedBox(height: 8),
+                Text('Uploading...', style: TextStyle(color: Colors.white)),
+            ],
+        ),
+    ),
+    successWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                Icon(Icons.check_circle, color: Colors.green, size: 32),
+                SizedBox(height: 8),
+                Text('Upload Successful!', style: TextStyle(color: Colors.white)),
+            ],
+        ),
+    ),
+    errorWidget: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                Icon(Icons.error, color: Colors.red, size: 32),
+                SizedBox(height: 8),
+                Text('Upload Failed', style: TextStyle(color: Colors.white)),
+            ],
+        ),
+    ),
+    onPressed: () async {
+        // Simulate a long operation
+        await Future.delayed(Duration(seconds: 4));
+        return true; // Return false for error
+    },
 )
 ```
 
@@ -303,17 +303,17 @@ return true; // Return false for error
 
 ```dart
 RippleActionButton(
-idleWidget: Padding(
-padding: EdgeInsets.all(16.0),
-child: Text('Ripple Custom', style: TextStyle(color: Colors.white)),
-),
-rippleSplashFactory: InkRipple.splashFactory, // Use a custom ripple effect
-rippleSplashColor: Colors.yellow.withOpacity(0.5),
-rippleHighlightColor: Colors.yellow.withOpacity(0.3),
-onPressed: () async {
-await Future.delayed(Duration(seconds: 2));
-return true;
-},
+    idleWidget: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('Ripple Custom', style: TextStyle(color: Colors.white)),
+    ),
+    rippleSplashFactory: InkRipple.splashFactory, // Use a custom ripple effect
+    rippleSplashColor: Colors.yellow.withOpacity(0.5),
+    rippleHighlightColor: Colors.yellow.withOpacity(0.3),
+    onPressed: () async {
+        await Future.delayed(Duration(seconds: 2));
+        return true;
+    },
 )
 ```
 

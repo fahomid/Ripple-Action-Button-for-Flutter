@@ -27,7 +27,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  ripple_action_button: ^1.1.2
+  ripple_action_button: ^1.1.3
 ```
 
 Or, use the flutter pub add command:

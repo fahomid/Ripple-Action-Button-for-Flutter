@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.3 Small changes
+### Fixed
+- Updated license file to replace placeholders with the correct copyright year and owner information.
+- Fixed line indentation in the `example.md` file for better readability.
+
 ## 1.1.2 Small change
 ### Fixed
 - Corrected the version number mentioned in the README file to match the latest version of the package.
